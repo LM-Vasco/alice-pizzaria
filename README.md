@@ -46,6 +46,8 @@
 
 [ ] display selected ingredients on top of pizza
 
+[ ] code anything that might have been forgotten
+
 
 ### Milestone 5:
 
