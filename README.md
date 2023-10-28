@@ -3,11 +3,11 @@
 ## MVP:
 
 
-- Top view, player can move around
-- Needs to pick up pizzas from one spot and deliver to one or more, depending on how many he carries and can carry
-- Time starts counting after pizza is picked up. If it reaches 0, player loses a life
-- There's an enemy trying to steal the pizzas
-- After 3 failed deliveries, game is over.
+- Player will cook pizzas
+- A list of available ingredients will be shown for a few seconds and then disappear
+- A list of ingredients to use will appear and a counter starts
+- Player needs to remember location of said ingredients and click them
+- If time is over, of player selects wrong ingredients 3 times, game is over
 
 
 ## MILESTONES
@@ -15,39 +15,36 @@
 ### Milestone 1:
 
 
-[X] display temporary background
+[X] create html and css structure to be used all over
 
-[ ] display temporary player and create movement
+[ ] try not to lose mind and apply css needed for end-purpose
 
-[ ] maybe create common class for object size?
+[ ] add some elements to html
 
 
 ### Milestone 2:
 
 
-[X] display delivery spots
+[ ] create row like needed to display list of ingredients
 
-[ ] create collision to detect delivery
+[ ] create column like needed to display selected ingredients
+
+[ ] create grid like needed for correct placement of ingredients on pizza
 
 
 ### Milestone 3:
 
 
-[ ] spawn and display temporary pizzas
+[ ] code to display available ingredients
 
-[ ] logic and code for timer
-
-[ ] create collision to detect pickup
+[ ] code to display list of ingredients to use
 
 
 ### Milestone 4:
 
+[ ] code to select ingredients (click event)
 
-[ ] spawn temporary enemy that tries to stop you
-
-[ ] create collision 
-
-[ ] add movement logic
+[ ] display selected ingredients on top of pizza
 
 
 ### Milestone 5:
@@ -55,22 +52,18 @@
 
 **UI elements that display information:**
 
+[ ] time left code
+
+[ ] pizzas cooked
+
+[ ] lives
+
 [ ] beautify (objects images)
-
-[ ] time left
-
-[ ] pizzas carrying
-
-[ ] pizzas delivered
 
 
 ### Bonus:
 
 
-[ ] level up after x deliveries
+[ ] level up after x cooked pizzas
 
-[ ] increase player speed
-
-[ ] increase carrying capacity
-
-[ ] increase spots to deliver with each level
+[ ] increase list of available ingredients
