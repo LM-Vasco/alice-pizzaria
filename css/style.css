@@ -1,0 +1,126 @@
+/*
+    CSS common to all pages
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+body {
+    background-color: peru;
+    font-family: 'Dancing Script', cursive;
+    font-size: 60px;
+}
+
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    margin: 5% auto;
+    border: 1px solid black; /*TEMPORARY JUST TO SEE SIZES AND FITTINGS*/
+    height: 80vh;
+    width: 70vw;
+}
+
+/* 
+    CSS for index.html 
+*/
+
+#title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+}
+
+#title > h1 {
+    font-size: 100px;
+}
+
+#instructions-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#instructions-div > p {
+    font-size: 60px;
+    
+}
+
+#play-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+    margin-top: 0 auto;
+}
+
+#play-button {
+    width: 150px;
+    height: 60px;
+}
+
+/* 
+    CSS for game.html 
+*/
+
+#game-area {
+    display: flex;
+    flex-direction: column;
+}
+
+#ui-elements {
+    /* width: 100%; */
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 15%;
+    border: 2px solid yellow;
+}
+
+#ingredients-area {
+    height: 20%;
+    border: 2px solid yellow;
+}
+
+#gameplay-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* width: 100%; */
+    height: 65%;
+    border: 2px solid blue;
+    /* background-image: url('../images/background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat; */
+}
+
+#ingredient-list {
+    display: flex;
+    width: 20%;
+    /* height: auto; */
+    border: 2px solid red;
+}
+
+#pizza-area {
+    display: flex;
+    width: 60%;
+    /* height: auto; */
+    border: 2px solid black;
+}
+
+#cook-button-area {
+    display: flex;
+    width: 20%;
+    /* height: auto; */
+    justify-content: center;
+    align-items: center;
+    border: 2px solid brown
+}
+
+#cook-button {
+    width: 150px;
+    height: 60px;
+}
