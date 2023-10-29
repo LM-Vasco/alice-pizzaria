@@ -44,7 +44,7 @@
 
 ### Milestone 4:
 
-[ ] code to select ingredients (click event)
+[X] code to select ingredients (click event)
 
 [ ] display selected ingredients on top of pizza
 

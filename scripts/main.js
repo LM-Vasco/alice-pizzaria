@@ -23,7 +23,8 @@ function placeRandomIngredients() {
     let newElm = document.createElement("img");
 
     newElm.setAttribute("src", shuffledImages[i]);
-    newElm.setAttribute("name", shuffledImages[i].slice(10));
+    newElm.setAttribute("class", "avblImage");
+    newElm.setAttribute("name", shuffledImages[i].slice(10, -4));
 
     ingredientsSpots[i].appendChild(newElm);
   }
@@ -45,7 +46,8 @@ function selectRandomIngredients() {
       let newElm = document.createElement("img");
 
       newElm.setAttribute("src", imagesArray[randomNumber]);
-      newElm.setAttribute("name", imagesArray[randomNumber].slice(10));
+      newElm.setAttribute("class", "sltdImage");
+      newElm.setAttribute("name", imagesArray[randomNumber].slice(10, -4));
 
       selectedIngredients[index].appendChild(newElm);
       index++;
@@ -75,6 +77,45 @@ function shuffleImagesArray(imgArray) {
   return imgArray;
 }
 
+function addEventListenerIngredients() {
+  const ingredients = document.getElementsByClassName("avblImage");
+
+  for (let i = 0; i < ingredients.length; i++) {
+    ingredients[i].addEventListener("click", () => {
+      console.log(`You've clicked ${ingredients[i].name}`);
+      isIngredientCorrect(ingredients[i]);
+    });
+  }
+  
+}
+
+function isIngredientCorrect(ingredient) {
+  const selected = document.getElementsByClassName("sltdImage");
+
+    for (let i = 0; i < selected.length; i++) {
+      if (selected[i].name === ingredient.name) {
+        console.log("CORRECT!");
+      }
+    }
+}
+
 placeRandomIngredients();
 
 selectRandomIngredients();
+
+addEventListenerIngredients();
+
+
+
+/* function isIngredientCorrect() {
+    const selected = document.getElementsByClassName("sltdImage");
+    const ingredients = document.getElementsByClassName("avblImage");
+  
+    for (let j = 0; j < ingredients.length; j++) {
+      for (let i = 0; i < selected.length; i++) {
+        if (selected[i].name === ingredients[j].name) {
+          console.log("CORRECT!");
+        }
+      }
+    }
+  } */
