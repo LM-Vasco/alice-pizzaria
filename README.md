@@ -48,7 +48,11 @@
 
 [ ] display selected ingredients on top of pizza
 
-[ ] code anything that might have been forgotten
+[ ] code win/lose conditions
+
+[ ] code hiding images
+
+[ ] time left code
 
 
 ### Milestone 5:
@@ -56,7 +60,7 @@
 
 **UI elements that display information:**
 
-[ ] time left code
+[ ] timeleft
 
 [ ] pizzas cooked
 
