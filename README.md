@@ -39,7 +39,7 @@
 
 [X] code to shuffle available ingredients
 
-[ ] code to display list of ingredients to use
+[X] code to display list of ingredients to use
 
 
 ### Milestone 4:
