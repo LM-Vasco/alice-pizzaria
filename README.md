@@ -35,7 +35,9 @@
 ### Milestone 3:
 
 
-[ ] code to display available ingredients
+[X] code to display available ingredients
+
+[X] code to shuffle available ingredients
 
 [ ] code to display list of ingredients to use
 
