@@ -17,17 +17,17 @@
 
 [X] create html and css structure to be used all over
 
-[ ] try not to lose mind and apply css needed for end-purpose
+[X] try not to lose mind and apply css needed for end-purpose
 
-[ ] add some elements to html
+[X] add some elements to html
 
 
 ### Milestone 2:
 
 
-[ ] create row like needed to display list of ingredients
+[X] create row like needed to display list of ingredients
 
-[ ] create column like needed to display selected ingredients
+[X] create column like needed to display selected ingredients
 
 [ ] create grid like needed for correct placement of ingredients on pizza
 
