@@ -29,7 +29,7 @@
 
 [X] create column like needed to display selected ingredients
 
-[ ] create grid like needed for correct placement of ingredients on pizza
+[X] create grid like needed for correct placement of ingredients on pizza
 
 
 ### Milestone 3:
