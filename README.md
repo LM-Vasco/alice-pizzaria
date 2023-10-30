@@ -48,7 +48,7 @@
 
 [X] display selected ingredients on top of pizza
 
-[ ] code win/lose conditions
+[X] code win/lose conditions
 
 [ ] code hiding images
 

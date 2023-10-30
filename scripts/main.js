@@ -23,6 +23,9 @@ class SMT {
     this.ingredientsList = null;
     this.selectedIngredients = null;
     this.cookButton = null;
+    this.timeleftSpan = null;
+    this.pizzasCookedSpan = null;
+    this.livesSpan = null;
     this.pizzaIngredients = [];
     this.lives = 3;
     this.isGameOver = false;
@@ -39,6 +42,9 @@ class SMT {
       this.selectedIngredients =
         this.ingredientsList.getElementsByClassName("selected-ingredients");
       this.cookButton = document.getElementById("cook-button");
+      this.timeleftSpan = document.getElementById('time-left');
+      this.pizzasCookedSpan = document.getElementById('pizzas-cooked');
+      this.livesSpan = document.getElementById('lives');
     }
   }
 
