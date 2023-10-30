@@ -74,10 +74,13 @@ class SMT {
         let newElm = document.createElement("img");
         newElm.setAttribute("src", ingredients[i].getAttribute("src"));
         newElm.setAttribute("name", ingredients[i].getAttribute("src").slice(10, -4));
+        let remove = false;
 
         if (this.isIngredientCorrect(ingredients[i])) {
-          this.placeIngredients(ingredients[i]);
+           remove = this.placeIngredients(ingredients[i]);
         }
+
+        if(remove) newElm.removeEventListener('click', this);
 
         // QQ coisa tipo if pizza has 9 ing, it's done and return
       });
@@ -104,7 +107,8 @@ class SMT {
         }
       }
     }
-    //remove click event?
+    return true;
+    
   }
 
   selectRandomIngredients() {
@@ -153,23 +157,3 @@ const smt = new SMT();
 smt.placeRandomIngredients();
 smt.selectRandomIngredients();
 smt.addEventListenerIngredients();
-
-/* 
-placeRandomIngredients();
-
-selectRandomIngredients();
-
-addEventListenerIngredients(); */
-
-/* function isIngredientCorrect() {
-    const selected = document.getElementsByClassName("sltdImage");
-    const ingredients = document.getElementsByClassName("avblImage");
-  
-    for (let j = 0; j < ingredients.length; j++) {
-      for (let i = 0; i < selected.length; i++) {
-        if (selected[i].name === ingredients[j].name) {
-          console.log("CORRECT!");
-        }
-      }
-    }
-  } */
