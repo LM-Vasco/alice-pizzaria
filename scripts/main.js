@@ -9,103 +9,157 @@ imagesArray.push("../images/shrimp.png");
 imagesArray.push("../images/tomato.png");
 
 // Get html elements to manipulate
-const ingredientsArea = document.getElementById("ingredients-area");
+/* const ingredientsArea = document.getElementById("ingredients-area");
 const ingredientsSpots = ingredientsArea.getElementsByClassName("available-ingredients");
 
 const ingredientsList = document.getElementById("ingredient-list");
-const selectedIngredients = ingredientsList.getElementsByClassName("selected-ingredients");
+const selectedIngredients = ingredientsList.getElementsByClassName("selected-ingredients"); */
 
-function placeRandomIngredients() {
-  if (ingredientsSpots.length === 0 || ingredientsSpots.length > imagesArray.length) return;
-  const shuffledImages = shuffleImagesArray(imagesArray);
-
-  for (let i = 0; i < ingredientsSpots.length; i++) {
-    let newElm = document.createElement("img");
-
-    newElm.setAttribute("src", shuffledImages[i]);
-    newElm.setAttribute("class", "avblImage");
-    newElm.setAttribute("name", shuffledImages[i].slice(10, -4));
-
-    ingredientsSpots[i].appendChild(newElm);
+class SMT {
+  constructor() {
+    //dom elements
+    this.ingredientsArea = document.getElementById("ingredients-area");
+    this.ingredientsSpots = this.ingredientsArea.getElementsByClassName("available-ingredients");
+    this.ingredientsList = document.getElementById("ingredient-list");
+    this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
+    this.placedIngredients = 0;
   }
-}
 
-function selectRandomIngredients() {
-  if (selectedIngredients.length === 0) return;
+  placeRandomIngredients() {
+    if (this.ingredientsSpots.length === 0 || this.ingredientsSpots.length > imagesArray.length)
+      return;
 
-  let selected = 0;
-  let index = 0;
-  let selectedNumbers = [];
+    const shuffledImages = this.shuffleImagesArray(imagesArray);
 
-  while (selected < 3) {
-    let randomNumber = Math.floor(Math.random() * imagesArray.length);
-
-    if (selectedNumbers.indexOf(randomNumber) === -1) {
-      selectedNumbers.push(randomNumber);
-
+    for (let i = 0; i < this.ingredientsSpots.length; i++) {
       let newElm = document.createElement("img");
 
-      newElm.setAttribute("src", imagesArray[randomNumber]);
-      newElm.setAttribute("class", "sltdImage");
-      newElm.setAttribute("name", imagesArray[randomNumber].slice(10, -4));
+      newElm.setAttribute("src", shuffledImages[i]);
+      newElm.setAttribute("class", "avblImage");
+      newElm.setAttribute("name", shuffledImages[i].slice(10, -4));
 
-      selectedIngredients[index].appendChild(newElm);
-      index++;
-      selected++;
+      this.ingredientsSpots[i].appendChild(newElm);
     }
   }
 
-  for (let i = 0; i < selectedIngredients.length; i++) {}
-}
+  shuffleImagesArray(imgArray) {
+    let currentIndex = imgArray.length;
+    let randomIndex = 0;
 
-function shuffleImagesArray(imgArray) {
-  let currentIndex = imgArray.length;
-  let randomIndex = 0;
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
 
-  // While there remain elements to shuffle.
-  while (currentIndex > 0) {
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [imgArray[currentIndex], imgArray[randomIndex]] = [
-      imgArray[randomIndex],
-      imgArray[currentIndex],
-    ];
+      // And swap it with the current element.
+      [imgArray[currentIndex], imgArray[randomIndex]] = [
+        imgArray[randomIndex],
+        imgArray[currentIndex],
+      ];
+    }
+    return imgArray;
   }
-  return imgArray;
-}
 
-function addEventListenerIngredients() {
-  const ingredients = document.getElementsByClassName("avblImage");
+  addEventListenerIngredients() {
+    const ingredients = document.getElementsByClassName("avblImage");
+    const columns = document.getElementsByClassName("column");
 
-  for (let i = 0; i < ingredients.length; i++) {
-    ingredients[i].addEventListener("click", () => {
-      console.log(`You've clicked ${ingredients[i].name}`);
-      isIngredientCorrect(ingredients[i]);
-    });
+    for (let i = 0; i < ingredients.length; i++) {
+      ingredients[i].addEventListener("click", () => {
+        //lose life and check if lives <= 0
+
+        //console.log(ingredients[i].getAttribute("src"));
+
+        let newElm = document.createElement("img");
+        newElm.setAttribute("src", ingredients[i].getAttribute("src"));
+        newElm.setAttribute("name", ingredients[i].getAttribute("src").slice(10, -4));
+
+        if (this.isIngredientCorrect(ingredients[i])) {
+          this.placeIngredients(ingredients[i]);
+        }
+
+        // QQ coisa tipo if pizza has 9 ing, it's done and return
+      });
+    }
   }
-  
-}
 
-function isIngredientCorrect(ingredient) {
-  const selected = document.getElementsByClassName("sltdImage");
+  placeIngredients(ingredients) {
+    const columns = document.getElementsByClassName("column");
+
+    let selected = 0;
+
+    if (this.placedIngredients < 9) {
+      while (selected < 3) {
+        let randomNumber = Math.floor(Math.random() * 9);
+
+        if (columns[randomNumber].firstChild === null) {
+          let newElm = document.createElement("img");
+          newElm.setAttribute("src", ingredients.getAttribute("src"));
+          newElm.setAttribute("name", ingredients.getAttribute("src").slice(10, -4));
+
+          columns[randomNumber].appendChild(newElm);
+          selected++;
+          this.placedIngredients++;
+        }
+      }
+    }
+    //remove click event?
+  }
+
+  selectRandomIngredients() {
+    if (this.selectedIngredients.length === 0) return;
+
+    let selected = 0;
+    let index = 0;
+    let selectedNumbers = [];
+
+    while (selected < 3) {
+      let randomNumber = Math.floor(Math.random() * imagesArray.length);
+
+      if (selectedNumbers.indexOf(randomNumber) === -1) {
+        selectedNumbers.push(randomNumber);
+
+        let newElm = document.createElement("img");
+
+        newElm.setAttribute("src", imagesArray[randomNumber]);
+        newElm.setAttribute("class", "sltdImage");
+        newElm.setAttribute("name", imagesArray[randomNumber].slice(10, -4));
+
+        this.selectedIngredients[index].appendChild(newElm);
+        index++;
+        selected++;
+      }
+    }
+  }
+
+  isIngredientCorrect(ingredient) {
+    const selected = document.getElementsByClassName("sltdImage");
+
+    if (ingredient === null) return false;
 
     for (let i = 0; i < selected.length; i++) {
       if (selected[i].name === ingredient.name) {
-        console.log("CORRECT!");
+        //console.log("CORRECT");
+        return true;
       }
     }
+    return false;
+  }
 }
 
+const smt = new SMT();
+
+smt.placeRandomIngredients();
+smt.selectRandomIngredients();
+smt.addEventListenerIngredients();
+
+/* 
 placeRandomIngredients();
 
 selectRandomIngredients();
 
-addEventListenerIngredients();
-
-
+addEventListenerIngredients(); */
 
 /* function isIngredientCorrect() {
     const selected = document.getElementsByClassName("sltdImage");

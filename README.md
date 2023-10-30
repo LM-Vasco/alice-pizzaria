@@ -46,7 +46,7 @@
 
 [X] code to select ingredients (click event)
 
-[ ] display selected ingredients on top of pizza
+[X] display selected ingredients on top of pizza
 
 [ ] code win/lose conditions
 
