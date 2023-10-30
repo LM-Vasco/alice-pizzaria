@@ -22,7 +22,7 @@ class SMT {
     this.ingredientsSpots = this.ingredientsArea.getElementsByClassName("available-ingredients");
     this.ingredientsList = document.getElementById("ingredient-list");
     this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
-    this.placedIngredients = 0;
+    this.pizzaIngredients = [];
   }
 
   placeRandomIngredients() {
@@ -77,10 +77,8 @@ class SMT {
         let remove = false;
 
         if (this.isIngredientCorrect(ingredients[i])) {
-           remove = this.placeIngredients(ingredients[i]);
+           this.placeIngredients(ingredients[i]);
         }
-
-        if(remove) newElm.removeEventListener('click', this);
 
         // QQ coisa tipo if pizza has 9 ing, it's done and return
       });
@@ -89,10 +87,10 @@ class SMT {
 
   placeIngredients(ingredients) {
     const columns = document.getElementsByClassName("column");
-
+    console.log(ingredients)
     let selected = 0;
 
-    if (this.placedIngredients < 9) {
+    if (this.pizzaIngredients.indexOf(ingredients) === -1) {
       while (selected < 3) {
         let randomNumber = Math.floor(Math.random() * 9);
 
@@ -103,12 +101,10 @@ class SMT {
 
           columns[randomNumber].appendChild(newElm);
           selected++;
-          this.placedIngredients++;
+          this.pizzaIngredients.push(ingredients);
         }
       }
     }
-    return true;
-    
   }
 
   selectRandomIngredients() {
