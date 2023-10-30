@@ -18,11 +18,25 @@ const selectedIngredients = ingredientsList.getElementsByClassName("selected-ing
 class SMT {
   constructor() {
     //dom elements
+    this.ingredientsArea = null;
+    this.ingredientsSpots = null;
+    this.ingredientsList = null;
+    this.selectedIngredients = null;
+    this.cookButton = null;
+    this.pizzaIngredients = [];
+    this.lives = 3;
+    this.isGameOver = false;
+    this.cookedPizzas = 0;
+    this.timeleft = 0;
+    this.getDomElements();
+  }
+
+  getDomElements() {
     this.ingredientsArea = document.getElementById("ingredients-area");
     this.ingredientsSpots = this.ingredientsArea.getElementsByClassName("available-ingredients");
     this.ingredientsList = document.getElementById("ingredient-list");
     this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
-    this.pizzaIngredients = [];
+    this.cookButton = document.getElementById("cook-button");
   }
 
   placeRandomIngredients() {
@@ -62,32 +76,43 @@ class SMT {
   }
 
   addEventListenerIngredients() {
-    const ingredients = document.getElementsByClassName("avblImage");
-    const columns = document.getElementsByClassName("column");
+    if (!this.isGameOver) {
+      const ingredients = document.getElementsByClassName("avblImage");
 
-    for (let i = 0; i < ingredients.length; i++) {
-      ingredients[i].addEventListener("click", () => {
-        //lose life and check if lives <= 0
-
-        //console.log(ingredients[i].getAttribute("src"));
-
-        let newElm = document.createElement("img");
-        newElm.setAttribute("src", ingredients[i].getAttribute("src"));
-        newElm.setAttribute("name", ingredients[i].getAttribute("src").slice(10, -4));
-        let remove = false;
-
-        if (this.isIngredientCorrect(ingredients[i])) {
-           this.placeIngredients(ingredients[i]);
-        }
-
-        // QQ coisa tipo if pizza has 9 ing, it's done and return
+      this.cookButton.addEventListener("click", () => {
+        this.resetPizza();
       });
+
+      for (let i = 0; i < ingredients.length; i++) {
+        ingredients[i].addEventListener("click", () => {
+          //lose life and check if lives <= 0
+
+          //console.log(ingredients[i].getAttribute("src"));
+
+          let newElm = document.createElement("img");
+          newElm.setAttribute("src", ingredients[i].getAttribute("src"));
+          newElm.setAttribute("name", ingredients[i].getAttribute("src").slice(10, -4));
+
+          if (this.lives <= 0) {
+            console.log("GAME OVER");
+            this.isGameOver = true;
+            return;
+          }
+
+          if (this.isIngredientCorrect(ingredients[i])) {
+            this.placeIngredients(ingredients[i]);
+          } else {
+            this.lives--;
+          }
+
+          // QQ coisa tipo if pizza has 9 ing, it's done and return
+        });
+      }
     }
   }
 
   placeIngredients(ingredients) {
     const columns = document.getElementsByClassName("column");
-    console.log(ingredients)
     let selected = 0;
 
     if (this.pizzaIngredients.indexOf(ingredients) === -1) {
@@ -146,10 +171,43 @@ class SMT {
     }
     return false;
   }
+
+  setupEverything() {
+    if (this.isGameOver) {
+      this.lives = 3;
+      this.isGameOver = false;
+      this.cookedPizzas = 0;
+    }
+
+    this.placeRandomIngredients();
+    this.selectRandomIngredients();
+    this.addEventListenerIngredients();
+  }
+
+  resetPizza() {
+    if (this.pizzaIngredients.length === 9) {
+      this.cookedPizzas++;
+      console.log(this.cookedPizzas);
+
+      for (let i = 0; i < this.ingredientsSpots.length; i++) {
+        this.ingredientsSpots[i].removeChild(this.ingredientsSpots[i].firstChild);
+      }
+
+      for (let i = 0; i < this.selectedIngredients.length; i++) {
+        this.selectedIngredients[i].removeChild(this.selectedIngredients[i].firstChild);
+      }
+
+      const columns = document.getElementsByClassName("column");
+
+      for (let i = 0; i < columns.length; i++) {
+        columns[i].removeChild(columns[i].firstChild);
+      }
+    }
+
+    this.setupEverything();
+  }
 }
 
 const smt = new SMT();
 
-smt.placeRandomIngredients();
-smt.selectRandomIngredients();
-smt.addEventListenerIngredients();
+smt.setupEverything();
