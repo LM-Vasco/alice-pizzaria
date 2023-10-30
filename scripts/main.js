@@ -32,11 +32,14 @@ class SMT {
   }
 
   getDomElements() {
-    this.ingredientsArea = document.getElementById("ingredients-area");
-    this.ingredientsSpots = this.ingredientsArea.getElementsByClassName("available-ingredients");
-    this.ingredientsList = document.getElementById("ingredient-list");
-    this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
-    this.cookButton = document.getElementById("cook-button");
+    if (document.URL.includes("game.html")) {
+      this.ingredientsArea = document.getElementById("ingredients-area");
+      this.ingredientsSpots = this.ingredientsArea.getElementsByClassName("available-ingredients");
+      this.ingredientsList = document.getElementById("ingredient-list");
+      this.selectedIngredients =
+        this.ingredientsList.getElementsByClassName("selected-ingredients");
+      this.cookButton = document.getElementById("cook-button");
+    }
   }
 
   placeRandomIngredients() {
@@ -80,6 +83,7 @@ class SMT {
       const ingredients = document.getElementsByClassName("avblImage");
 
       this.cookButton.addEventListener("click", () => {
+        console.log("CLICK CLICK")
         this.resetPizza();
       });
 
@@ -93,10 +97,8 @@ class SMT {
           newElm.setAttribute("src", ingredients[i].getAttribute("src"));
           newElm.setAttribute("name", ingredients[i].getAttribute("src").slice(10, -4));
 
-          if (this.lives <= 0) {
-            console.log("GAME OVER");
-            this.isGameOver = true;
-            return;
+          if (this.lives <= 1) {
+            location.href = "./index.html";
           }
 
           if (this.isIngredientCorrect(ingredients[i])) {
@@ -173,21 +175,23 @@ class SMT {
   }
 
   setupEverything() {
-    if (this.isGameOver) {
-      this.lives = 3;
-      this.isGameOver = false;
-      this.cookedPizzas = 0;
-    }
+    console.log(this.lives);
 
-    this.placeRandomIngredients();
-    this.selectRandomIngredients();
-    this.addEventListenerIngredients();
+    console.log("SETUP");
+    if (document.URL.includes("game.html")) {
+      this.placeRandomIngredients();
+      this.selectRandomIngredients();
+      this.addEventListenerIngredients();
+    }
   }
 
   resetPizza() {
+    console.log(this.pizzaIngredients);
     if (this.pizzaIngredients.length === 9) {
       this.cookedPizzas++;
-      console.log(this.cookedPizzas);
+      
+      this.pizzaIngredients = [];
+      console.log(this.pizzaIngredients);
 
       for (let i = 0; i < this.ingredientsSpots.length; i++) {
         this.ingredientsSpots[i].removeChild(this.ingredientsSpots[i].firstChild);
@@ -199,12 +203,14 @@ class SMT {
 
       const columns = document.getElementsByClassName("column");
 
-      for (let i = 0; i < columns.length; i++) {
-        columns[i].removeChild(columns[i].firstChild);
+      if (columns.length !== 0) {
+        for (let i = 0; i < columns.length; i++) {
+          if (columns[i].firstChild !== null) columns[i].removeChild(columns[i].firstChild);
+        }
       }
+      console.log("AM HERE");
+      this.setupEverything();
     }
-
-    this.setupEverything();
   }
 }
 
