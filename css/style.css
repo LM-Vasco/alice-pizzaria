@@ -5,7 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
 
 body {
-  background-color: peru;
+  background-color: #dc6b29;
   font-family: "Dancing Script", cursive;
   font-size: 60px;
 }
@@ -14,7 +14,8 @@ body {
   display: flex;
   flex-direction: column;
   margin: 5% auto;
-  border: 1px solid black; /*TEMPORARY JUST TO SEE SIZES AND FITTINGS*/
+  border: 5px solid #b61500; /*TEMPORARY JUST TO SEE SIZES AND FITTINGS*/
+  border-radius: 5px;
   height: 80vh;
   width: 70vw;
 }
@@ -76,7 +77,8 @@ body {
   justify-content: space-around;
   align-items: center;
   height: 15%;
-  border: 2px solid yellow;
+  background-color: #ffac0e;
+  /* border: 2px solid yellow; */
 }
 
 #ingredients-area {
@@ -85,13 +87,16 @@ body {
   align-content: center;
   align-items: center;
   height: 20%;
-  border: 2px solid yellow;
+  background-color: #ffac0e;
+  /* border: 2px solid yellow; */
 }
 
 .available-ingredients {
   width: 120px;
   height: 120px;
-  border: 2px solid white;
+  border: 5px solid #dc6b29;
+  border-radius: 10px;
+  margin: 2px;
 }
 
 .avblImage {
@@ -105,7 +110,8 @@ body {
   flex-wrap: nowrap;
   /* width: 100%; */
   height: 65%;
-  border: 2px solid blue;
+  background-color: 	#ffac0e;
+  /* border: 2px solid blue; */
   /* background-image: url('../images/background.jpg');
     background-size: 100% 100%;
     background-repeat: no-repeat; */
@@ -117,22 +123,32 @@ body {
   justify-content: center;
   align-content: center;
   align-items: center;
+  background-image: url('../images/board.png');
+  /* background-size: contain; */
+  background-repeat: no-repeat;
+  background-position: center;
   width: 20%;
   /* height: auto; */
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .selected-ingredients {
   width: 120px;
   height: 120px;
-  border: 2px solid white;
+  /* border: 4px solid #f3c681;
+  border-radius: 10px;
+  margin: 2px; */
 }
 
 #pizza-area {
   display: flex;
-  width: 60%;
+  width: 50%;
+  background-image: url('../images/countertop.png');
+  /* background-size: contain; */
+  background-repeat: no-repeat;
+  background-position: center;
   /* height: auto; */
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 
 #pizza-grid {
@@ -144,7 +160,7 @@ body {
   margin: auto;
   width: 500px;
   height: 500px;
-  border: 2px solid white;
+  /* border: 2px solid white; */
 }
 
 .row {
@@ -158,14 +174,23 @@ body {
 
 #cook-button-area {
   display: flex;
-  width: 20%;
+  width: 30%;
+  background-image: url('../images/oven.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   /* height: auto; */
   justify-content: center;
   align-items: center;
-  border: 2px solid brown;
+  /* border: 2px solid brown; */
 }
 
 #cook-button {
+  background-color: #ffac0e;
   width: 150px;
   height: 60px;
+  font-family: "Dancing Spirit", cursive;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 20px;
 }
