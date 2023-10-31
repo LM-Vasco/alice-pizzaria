@@ -52,15 +52,11 @@
 
 [X] code hiding images
 
-[ ] timer code
-
 
 ### Milestone 5:
 
 
 **UI elements that display information:**
-
-[ ] timer
 
 [X] pizzas cooked
 
