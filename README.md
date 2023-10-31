@@ -52,7 +52,7 @@
 
 [X] code hiding images
 
-[ ] time left code
+[ ] timer code
 
 
 ### Milestone 5:
@@ -60,11 +60,11 @@
 
 **UI elements that display information:**
 
-[ ] timeleft
+[ ] timer
 
-[ ] pizzas cooked
+[X] pizzas cooked
 
-[ ] lives
+[X] lives
 
 [ ] beautify (objects images)
 
