@@ -94,6 +94,11 @@ body {
   border: 2px solid white;
 }
 
+.avblImage {
+  width: 120px;
+  height: 120px;
+}
+
 #gameplay-area {
   display: flex;
   flex-direction: row;

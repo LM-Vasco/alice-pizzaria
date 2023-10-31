@@ -50,7 +50,7 @@
 
 [X] code win/lose conditions
 
-[ ] code hiding images
+[X] code hiding images
 
 [ ] time left code
 

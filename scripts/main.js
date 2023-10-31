@@ -22,6 +22,7 @@ class SMT {
     this.ingredientsSpots = null;
     this.ingredientsList = null;
     this.selectedIngredients = null;
+    this.shuffledImages = [];
     this.cookButton = null;
     this.timeleftSpan = null;
     this.pizzasCookedSpan = null;
@@ -39,27 +40,32 @@ class SMT {
       this.ingredientsArea = document.getElementById("ingredients-area");
       this.ingredientsSpots = this.ingredientsArea.getElementsByClassName("available-ingredients");
       this.ingredientsList = document.getElementById("ingredient-list");
-      this.selectedIngredients =
-        this.ingredientsList.getElementsByClassName("selected-ingredients");
+      this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
       this.cookButton = document.getElementById("cook-button");
-      this.timeleftSpan = document.getElementById('time-left');
-      this.pizzasCookedSpan = document.getElementById('pizzas-cooked');
-      this.livesSpan = document.getElementById('lives');
+      this.timeleftSpan = document.getElementById("time-left");
+      this.pizzasCookedSpan = document.getElementById("pizzas-cooked");
+      this.livesSpan = document.getElementById("lives");
+
+      this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
+      this.livesSpan.innerHTML = `Lives: ${this.lives}`;
     }
   }
 
   placeRandomIngredients() {
-    if (this.ingredientsSpots.length === 0 || this.ingredientsSpots.length > imagesArray.length)
-      return;
+    if (this.ingredientsSpots.length === 0 || this.ingredientsSpots.length > imagesArray.length) return;
 
-    const shuffledImages = this.shuffleImagesArray(imagesArray);
+    this.shuffledImages = structuredClone(this.shuffleImagesArray(imagesArray));
 
     for (let i = 0; i < this.ingredientsSpots.length; i++) {
+
+     /*  let newElm = document.createElement("div");
+      newElm.setAttribute("style", `background: url(${shuffledImages[i]})`); */
+
       let newElm = document.createElement("img");
 
-      newElm.setAttribute("src", shuffledImages[i]);
+      newElm.setAttribute("src", this.shuffledImages[i]);
       newElm.setAttribute("class", "avblImage");
-      newElm.setAttribute("name", shuffledImages[i].slice(10, -4));
+      newElm.setAttribute("name", this.shuffledImages[i].slice(10, -4));
 
       this.ingredientsSpots[i].appendChild(newElm);
     }
@@ -76,10 +82,7 @@ class SMT {
       currentIndex--;
 
       // And swap it with the current element.
-      [imgArray[currentIndex], imgArray[randomIndex]] = [
-        imgArray[randomIndex],
-        imgArray[currentIndex],
-      ];
+      [imgArray[currentIndex], imgArray[randomIndex]] = [imgArray[randomIndex], imgArray[currentIndex]];
     }
     return imgArray;
   }
@@ -89,8 +92,9 @@ class SMT {
       const ingredients = document.getElementsByClassName("avblImage");
 
       this.cookButton.addEventListener("click", () => {
-        console.log("CLICK CLICK")
+        //console.log("CLICK CLICK");
         this.resetPizza();
+        this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
       });
 
       for (let i = 0; i < ingredients.length; i++) {
@@ -99,18 +103,21 @@ class SMT {
 
           //console.log(ingredients[i].getAttribute("src"));
 
-          let newElm = document.createElement("img");
+          /* let newElm = document.createElement("img");
           newElm.setAttribute("src", ingredients[i].getAttribute("src"));
-          newElm.setAttribute("name", ingredients[i].getAttribute("src").slice(10, -4));
+          newElm.setAttribute("name", ingredients[i].getAttribute("src").slice(10, -4)); */
 
           if (this.lives <= 1) {
             location.href = "./index.html";
           }
 
           if (this.isIngredientCorrect(ingredients[i])) {
+            ingredients[i].setAttribute('src', this.shuffledImages[i])
             this.placeIngredients(ingredients[i]);
           } else {
+            ingredients[i].setAttribute('src', '../images/wrong.png')
             this.lives--;
+            this.livesSpan.innerHTML = `Lives: ${this.lives}`;
           }
 
           // QQ coisa tipo if pizza has 9 ing, it's done and return
@@ -181,23 +188,33 @@ class SMT {
   }
 
   setupEverything() {
-    console.log(this.lives);
+    //console.log(this.lives);
 
     console.log("SETUP");
     if (document.URL.includes("game.html")) {
       this.placeRandomIngredients();
       this.selectRandomIngredients();
       this.addEventListenerIngredients();
+      this.hideIngredients();
     }
   }
 
+  hideIngredients() {
+
+    setTimeout(() => {
+      for (let i = 0; i < this.ingredientsSpots.length; i++){
+        this.ingredientsSpots[i].firstChild.setAttribute('src', '../images/question2.png');
+      }
+      }, 2000);
+  }
+
   resetPizza() {
-    console.log(this.pizzaIngredients);
+    //console.log(this.pizzaIngredients);
     if (this.pizzaIngredients.length === 9) {
       this.cookedPizzas++;
-      
+
       this.pizzaIngredients = [];
-      console.log(this.pizzaIngredients);
+      //console.log(this.pizzaIngredients);
 
       for (let i = 0; i < this.ingredientsSpots.length; i++) {
         this.ingredientsSpots[i].removeChild(this.ingredientsSpots[i].firstChild);
@@ -214,12 +231,14 @@ class SMT {
           if (columns[i].firstChild !== null) columns[i].removeChild(columns[i].firstChild);
         }
       }
-      console.log("AM HERE");
+      //console.log("AM HERE");
       this.setupEverything();
     }
+    
   }
 }
 
 const smt = new SMT();
 
 smt.setupEverything();
+
