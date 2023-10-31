@@ -5,9 +5,9 @@
 
 - Player will cook pizzas
 - A list of available ingredients will be shown for a few seconds and then disappear
-- A list of ingredients to use will appear and a counter starts
 - Player needs to remember location of said ingredients and click them
-- If time is over, of player selects wrong ingredients 3 times, game is over
+- A list of ingredients to use will appear
+- If player selects wrong ingredients 3 times, game is over
 
 
 ## MILESTONES
