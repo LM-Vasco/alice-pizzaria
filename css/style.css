@@ -7,7 +7,7 @@
 body {
   background-color: #dc6b29;
   font-family: "Dancing Script", cursive;
-  font-size: 60px;
+  font-size: 50px;
 }
 
 .game-screen {
@@ -65,6 +65,14 @@ body {
     CSS for game.html 
 */
 
+/* #banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+  background-color: #ffac0e;
+} */
+
 #game-area {
   display: flex;
   flex-direction: column;
@@ -73,12 +81,18 @@ body {
 #ui-elements {
   /* width: 100%; */
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   height: 15%;
   background-color: #ffac0e;
   /* border: 2px solid yellow; */
+}
+
+#banner:first-child {
+  font-size: 70px;
+  width: 100%;
+  text-align: center;
 }
 
 #ingredients-area {

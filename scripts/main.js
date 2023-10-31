@@ -15,7 +15,7 @@ const ingredientsSpots = ingredientsArea.getElementsByClassName("available-ingre
 const ingredientsList = document.getElementById("ingredient-list");
 const selectedIngredients = ingredientsList.getElementsByClassName("selected-ingredients"); */
 
-class SMT {
+class Game {
   constructor() {
     //dom elements
     this.ingredientsArea = null;
@@ -149,8 +149,6 @@ class SMT {
     }
   }
 
-  selectedIngredientsHidden() {}
-
   selectRandomIngredients() {
     if (this.selectedIngredients.length === 0) return;
 
@@ -164,7 +162,7 @@ class SMT {
     }
 
     while (selected < 3) {
-      let randomNumber = Math.floor(Math.random() * imagesArray.length);
+      let randomNumber = Math.floor(Math.random() * this.shuffledImages.length);
 
       if (selectedNumbers.indexOf(randomNumber) === -1) {
         selectedNumbers.push(randomNumber);
@@ -180,9 +178,9 @@ class SMT {
 
           this.selectedIngredients[index].appendChild(newElm);
         } else {
-          newElm.setAttribute("src", imagesArray[randomNumber]);
+          newElm.setAttribute("src", this.shuffledImages[randomNumber]);
           newElm.setAttribute("class", "sltdImage");
-          newElm.setAttribute("name", imagesArray[randomNumber].slice(10, -4));
+          newElm.setAttribute("name", this.shuffledImages[randomNumber].slice(10, -4));
 
           this.selectedIngredients[index].appendChild(newElm);
         }
@@ -261,6 +259,6 @@ class SMT {
   }
 }
 
-const smt = new SMT();
+const game = new Game();
 
-smt.setupEverything();
+game.setupEverything();
