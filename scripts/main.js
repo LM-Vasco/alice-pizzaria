@@ -9,13 +9,14 @@ class Game {
     this.cookButton = null;
     this.pizzasCookedSpan = null;
     this.livesSpan = null;
+    this.levelSpan = null;
 
     this.shuffledImages = [];
     this.pizzaIngredients = [];
 
     this.level = 1;
-    this.availableIngredients = 4;
-    this.recipeIngredients = 2;
+    this.availableIngredients = 3;
+    this.recipeIngredients = 1;
     this.lives = 3;
     this.cookedPizzas = 0;
     this.timer = 2000;
@@ -33,10 +34,11 @@ class Game {
     this.cookButton = document.getElementById("cook-button");
     this.pizzasCookedSpan = document.getElementById("pizzas-cooked");
     this.livesSpan = document.getElementById("lives");
-    this.counterSpan = document.getElementById("counter");
+    this.levelSpan = document.getElementById("level");
 
     this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
     this.livesSpan.innerHTML = `Lives: ${this.lives}`;
+    this.levelSpan.innerHTML = `Level: ${this.level}`;
   }
 
   setupGame() {
@@ -75,8 +77,6 @@ class Game {
     this.shuffledImages = structuredClone(this.shuffleImagesArray(this.ingredientsImages, this.availableIngredients));
     this.shuffledImages.splice(0, this.shuffledImages.length - this.availableIngredients);
 
-    console.log(this.shuffledImages);
-
     for (let i = 0; i < this.ingredientsSpots.length; i++) {
       let newElm = document.createElement("img");
 
@@ -105,23 +105,52 @@ class Game {
   }
 
   levelUp() {
-    if (this.cookedPizzas >= 3) {
+    /*    if (this.cookedPizzas >= 2) {
       this.level = 2;
+      
     }
-    if (this.cookedPizzas >= 6) {
+    if (this.cookedPizzas >= 4) {
       this.level = 3;
     }
+    if (this.cookedPizzas >= 4) {
+      this.level = 4;
+    }
+    if (this.cookedPizzas >= 4) {
+      this.level = 5;
+    }
+    if (this.cookedPizzas >= 4) {
+      this.level = 6;
+    } */
 
-    switch (this.level) {
+    switch (this.cookedPizzas) {
       case 2:
+        this.level = 2;
+        this.availableIngredients = 4;
+        this.recipeIngredients = 1;
+        break;
+      case 4:
+        this.level = 3;
+        this.availableIngredients = 4;
+        this.recipeIngredients = 2;
+        break;
+      case 6:
+        this.level = 4;
+        this.availableIngredients = 5;
+        this.recipeIngredients = 2;
+        break;
+      case 8:
+        this.level = 5;
         this.availableIngredients = 5;
         this.recipeIngredients = 3;
         break;
-      case 3:
+      case 10:
+        this.level = 6;
         this.availableIngredients = 6;
         this.recipeIngredients = 3;
         break;
     }
+
+    this.levelSpan.innerHTML = `Level: ${this.level}`;
   }
 
   addEventListenerIngredients() {
@@ -129,7 +158,6 @@ class Game {
       const ingredients = document.getElementsByClassName("avblImage");
 
       this.cookButton.addEventListener("click", () => {
-        
         this.resetPizza();
         this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
       });
@@ -145,14 +173,12 @@ class Game {
             this.lives--;
             this.livesSpan.innerHTML = `Lives: ${this.lives}`;
           }
-          
 
           if (this.lives <= 0) {
             location.href = "./gameover.html";
           }
         });
       }
-      
     }
   }
 
@@ -206,7 +232,6 @@ class Game {
           newElm.setAttribute("src", "./images/" + this.shuffledImages[randomNumber] + ".png");
           newElm.setAttribute("class", "selectedImage");
           newElm.setAttribute("name", this.shuffledImages[randomNumber]);
-          console.log(newElm)
 
           this.selectedIngredients[index].appendChild(newElm);
         }
