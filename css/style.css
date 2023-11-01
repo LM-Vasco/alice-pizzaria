@@ -2,7 +2,6 @@
     CSS common to all pages
 */
 
-/* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap"); */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Merienda:wght@600&display=swap');
 
 body {
@@ -78,14 +77,6 @@ body {
     CSS for game.html 
 */
 
-/* #banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 100px;
-  background-color: #ffac0e;
-} */
-
 #game-area {
   display: flex;
   flex-direction: column; 
@@ -99,15 +90,7 @@ body {
   align-items: center;
   height: 15%;
   color: #b61500;
-  /* background-color: #dc6b29;   */
-  /* border: 2px solid yellow; */
 }
-
-/* #banner:first-child {
-  font-size: 70px;
-  width: 100%;
-  text-align: center;
-} */
 
 #ingredients-area {
   display: flex;
@@ -115,8 +98,6 @@ body {
   align-content: center;
   align-items: center;
   height: 20%;
-  /* background-color: #dc6b29;  */
-  /* border: 2px solid yellow; */
 }
 
 .available-ingredients {
@@ -136,13 +117,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  /* width: 100%; */
   height: 65%;
-  /* background-color: #dc6b29; */
-  /* border: 2px solid blue; */
-  /* background-image: url('../images/background.jpg');
-    background-size: 100% 100%;
-    background-repeat: no-repeat; */
 }
 
 #ingredient-list {
@@ -152,31 +127,22 @@ body {
   align-content: center;
   align-items: center;
   background-image: url('../images/board.png');
-  /* background-size: contain; */
   background-repeat: no-repeat;
   background-position: center;
   width: 30%;
-  /* height: auto; */
-  /* border: 2px solid red; */
 }
 
 .selected-ingredients {
   width: 120px;
   height: 120px;
-  /* border: 4px solid #f3c681;
-  border-radius: 10px;
-  margin: 2px; */
 }
 
 #pizza-area {
   display: flex;
   width: 40%;
   background-image: url('../images/countertop.png');
-  /* background-size: contain; */
   background-repeat: no-repeat;
   background-position: center;
-  /* height: auto; */
-  /* border: 2px solid black; */
 }
 
 #pizza-grid {
@@ -188,7 +154,6 @@ body {
   margin: auto;
   width: 500px;
   height: 500px;
-  /* border: 2px solid white; */
 }
 
 .row {
@@ -207,10 +172,8 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  /* height: auto; */
   justify-content: center;
   align-items: center;
-  /* border: 2px solid brown; */
 }
 
 #cook-button, #play-button {

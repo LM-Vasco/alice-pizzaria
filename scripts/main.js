@@ -1,78 +1,95 @@
-// Push available ingredients images into an array
-const imagesArray = [];
-
-imagesArray.push("./images/mushrooms.png");
-imagesArray.push("./images/olives.png");
-imagesArray.push("./images/pepper.png");
-imagesArray.push("./images/pepperoni.png");
-imagesArray.push("./images/shrimp.png");
-imagesArray.push("./images/tomato.png");
-
-// Get html elements to manipulate
-/* const ingredientsArea = document.getElementById("ingredients-area");
-const ingredientsSpots = ingredientsArea.getElementsByClassName("available-ingredients");
-
-const ingredientsList = document.getElementById("ingredient-list");
-const selectedIngredients = ingredientsList.getElementsByClassName("selected-ingredients"); */
-
 class Game {
   constructor() {
-    //dom elements
+    this.ingredientsImages = ["mushrooms", "olives", "pepper", "pepperoni", "shrimp", "tomato"];
+
     this.ingredientsArea = null;
     this.ingredientsSpots = null;
     this.ingredientsList = null;
     this.selectedIngredients = null;
-    this.shuffledImages = [];
     this.cookButton = null;
     this.pizzasCookedSpan = null;
     this.livesSpan = null;
+
+    this.shuffledImages = [];
     this.pizzaIngredients = [];
+
+    this.level = 1;
+    this.availableIngredients = 4;
+    this.recipeIngredients = 2;
     this.lives = 3;
-    this.isGameOver = false;
     this.cookedPizzas = 0;
     this.timer = 2000;
     this.isTimeOver = false;
+    this.isGameOver = false;
+
     this.getDomElements();
-    
   }
 
   getDomElements() {
-    if (document.URL.includes("game.html")) {
-      this.ingredientsArea = document.getElementById("ingredients-area");
-      this.ingredientsSpots = this.ingredientsArea.getElementsByClassName("available-ingredients");
-      this.ingredientsList = document.getElementById("ingredient-list");
-      this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
-      this.cookButton = document.getElementById("cook-button");
-      this.pizzasCookedSpan = document.getElementById("pizzas-cooked");
-      this.livesSpan = document.getElementById("lives");
-      this.counterSpan = document.getElementById('counter')
+    this.ingredientsArea = document.getElementById("ingredients-area");
+    this.ingredientsSpots = this.ingredientsArea.getElementsByClassName("available-ingredients");
+    this.ingredientsList = document.getElementById("ingredient-list");
+    this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
+    this.cookButton = document.getElementById("cook-button");
+    this.pizzasCookedSpan = document.getElementById("pizzas-cooked");
+    this.livesSpan = document.getElementById("lives");
+    this.counterSpan = document.getElementById("counter");
 
-      this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
-      this.livesSpan.innerHTML = `Lives: ${this.lives}`;
+    this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
+    this.livesSpan.innerHTML = `Lives: ${this.lives}`;
+  }
+
+  setupGame() {
+    this.createAvailableIngredientsDivs();
+    this.createRecipeIngredientsDivs();
+    this.placeRandomIngredients();
+
+    this.hideAvailableIngredients();
+    this.addEventListenerIngredients();
+    this.selectRandomIngredients();
+  }
+
+  createAvailableIngredientsDivs() {
+    for (let i = 0; i < this.availableIngredients; i++) {
+      let newElm = document.createElement("div");
+
+      newElm.setAttribute("class", "available-ingredients");
+
+      this.ingredientsArea.appendChild(newElm);
+    }
+  }
+
+  createRecipeIngredientsDivs() {
+    for (let i = 0; i < this.recipeIngredients; i++) {
+      let newElm = document.createElement("div");
+
+      newElm.setAttribute("class", "selected-ingredients");
+
+      this.ingredientsList.appendChild(newElm);
     }
   }
 
   placeRandomIngredients() {
-    if (this.ingredientsSpots.length === 0 || this.ingredientsSpots.length > imagesArray.length) return;
+    if (this.ingredientsSpots.length === 0 || this.ingredientsSpots.length > this.ingredientsImages.length) return;
 
-    this.shuffledImages = structuredClone(this.shuffleImagesArray(imagesArray));
+    this.shuffledImages = structuredClone(this.shuffleImagesArray(this.ingredientsImages, this.availableIngredients));
+    this.shuffledImages.splice(0, this.shuffledImages.length - this.availableIngredients);
+
+    console.log(this.shuffledImages);
 
     for (let i = 0; i < this.ingredientsSpots.length; i++) {
-      /*  let newElm = document.createElement("div");
-      newElm.setAttribute("style", `background: url(${shuffledImages[i]})`); */
-
       let newElm = document.createElement("img");
 
-      newElm.setAttribute("src", this.shuffledImages[i]);
+      newElm.setAttribute("src", "./images/" + this.shuffledImages[i] + ".png");
       newElm.setAttribute("class", "avblImage");
-      newElm.setAttribute("name", this.shuffledImages[i].slice(10, -4));
+      newElm.setAttribute("name", this.shuffledImages[i]);
 
       this.ingredientsSpots[i].appendChild(newElm);
     }
   }
 
-  shuffleImagesArray(imgArray) {
-    let currentIndex = imgArray.length;
+  shuffleImagesArray(imagesArray) {
+    let currentIndex = imagesArray.length;
     let randomIndex = 0;
 
     // While there remain elements to shuffle.
@@ -82,9 +99,29 @@ class Game {
       currentIndex--;
 
       // And swap it with the current element.
-      [imgArray[currentIndex], imgArray[randomIndex]] = [imgArray[randomIndex], imgArray[currentIndex]];
+      [imagesArray[currentIndex], imagesArray[randomIndex]] = [imagesArray[randomIndex], imagesArray[currentIndex]];
     }
-    return imgArray;
+    return imagesArray;
+  }
+
+  levelUp() {
+    if (this.cookedPizzas >= 3) {
+      this.level = 2;
+    }
+    if (this.cookedPizzas >= 6) {
+      this.level = 3;
+    }
+
+    switch (this.level) {
+      case 2:
+        this.availableIngredients = 5;
+        this.recipeIngredients = 3;
+        break;
+      case 3:
+        this.availableIngredients = 6;
+        this.recipeIngredients = 3;
+        break;
+    }
   }
 
   addEventListenerIngredients() {
@@ -92,39 +129,30 @@ class Game {
       const ingredients = document.getElementsByClassName("avblImage");
 
       this.cookButton.addEventListener("click", () => {
-        //console.log("CLICK CLICK");
+        
         this.resetPizza();
         this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
       });
 
       for (let i = 0; i < ingredients.length; i++) {
         ingredients[i].addEventListener("click", () => {
-          //lose life and check if lives <= 0
-
-          //console.log(ingredients[i].getAttribute("src"));
-
-          /* let newElm = document.createElement("img");
-          newElm.setAttribute("src", ingredients[i].getAttribute("src"));
-          newElm.setAttribute("name", ingredients[i].getAttribute("src").slice(10, -4)); */
-
-          
-
           if (this.isIngredientCorrect(ingredients[i])) {
-            ingredients[i].setAttribute("src", this.shuffledImages[i]);
+            ingredients[i].setAttribute("src", "./images/" + this.shuffledImages[i] + ".png");
+            ingredients[i].setAttribute("name", this.shuffledImages[i]);
             this.placeIngredients(ingredients[i]);
           } else {
             ingredients[i].setAttribute("src", "./images/wrong.png");
             this.lives--;
             this.livesSpan.innerHTML = `Lives: ${this.lives}`;
           }
+          
 
           if (this.lives <= 0) {
             location.href = "./gameover.html";
           }
-
-          // QQ coisa tipo if pizza has 9 ing, it's done and return
         });
       }
+      
     }
   }
 
@@ -139,7 +167,7 @@ class Game {
         if (columns[randomNumber].firstChild === null) {
           let newElm = document.createElement("img");
           newElm.setAttribute("src", ingredients.getAttribute("src"));
-          newElm.setAttribute("name", ingredients.getAttribute("src").slice(10, -4));
+          newElm.setAttribute("name", ingredients.getAttribute("name"));
 
           columns[randomNumber].appendChild(newElm);
           selected++;
@@ -161,7 +189,7 @@ class Game {
         this.selectedIngredients[i].removeChild(this.selectedIngredients[i].firstChild);
     }
 
-    while (selected < 3) {
+    while (selected < this.recipeIngredients) {
       let randomNumber = Math.floor(Math.random() * this.shuffledImages.length);
 
       if (selectedNumbers.indexOf(randomNumber) === -1) {
@@ -169,18 +197,16 @@ class Game {
 
         let newElm = document.createElement("img");
 
-        //console.log(this.selectedIngredients)
-        
         if (!this.isTimeOver) {
           newElm.setAttribute("src", "./images/question2.png");
-          newElm.setAttribute("class", "sltdImage");
-          //console.log("asdsad");
+          newElm.setAttribute("class", "selectedImage");
 
           this.selectedIngredients[index].appendChild(newElm);
         } else {
-          newElm.setAttribute("src", this.shuffledImages[randomNumber]);
-          newElm.setAttribute("class", "sltdImage");
-          newElm.setAttribute("name", this.shuffledImages[randomNumber].slice(10, -4));
+          newElm.setAttribute("src", "./images/" + this.shuffledImages[randomNumber] + ".png");
+          newElm.setAttribute("class", "selectedImage");
+          newElm.setAttribute("name", this.shuffledImages[randomNumber]);
+          console.log(newElm)
 
           this.selectedIngredients[index].appendChild(newElm);
         }
@@ -191,74 +217,60 @@ class Game {
   }
 
   isIngredientCorrect(ingredient) {
-    const selected = document.getElementsByClassName("sltdImage");
+    const selected = document.getElementsByClassName("selectedImage");
 
     if (ingredient === null) return false;
 
     for (let i = 0; i < selected.length; i++) {
       if (selected[i].name === ingredient.name) {
-        //console.log("CORRECT");
         return true;
       }
     }
     return false;
   }
 
-  setupEverything() {
-    //console.log(this.lives);
-
-    console.log("SETUP");
-    if (document.URL.includes("game.html")) {
-      this.placeRandomIngredients();
-      this.addEventListenerIngredients();
-      this.hideAvailableIngredients();
+  hideAvailableIngredients() {
+    setTimeout(() => {
+      for (let i = 0; i < this.ingredientsSpots.length; i++) {
+        this.ingredientsSpots[i].firstChild.setAttribute("src", "./images/question2.png");
+      }
+      this.timer = 2000;
+      this.isTimeOver = true;
       this.selectRandomIngredients();
+    }, this.timer);
+  }
+
+  removeChildDivs() {
+    while (this.ingredientsArea.firstChild) {
+      this.ingredientsArea.removeChild(this.ingredientsArea.lastChild);
+    }
+
+    while (this.ingredientsList.firstChild) {
+      this.ingredientsList.removeChild(this.ingredientsList.lastChild);
+    }
+
+    const columns = document.getElementsByClassName("column");
+
+    if (columns.length !== 0) {
+      for (let i = 0; i < columns.length; i++) {
+        if (columns[i].firstChild !== null) columns[i].removeChild(columns[i].firstChild);
+      }
     }
   }
 
-  
-  hideAvailableIngredients() {
-     setTimeout(() => {
-       for (let i = 0; i < this.ingredientsSpots.length; i++) {
-         this.ingredientsSpots[i].firstChild.setAttribute("src", "./images/question2.png");
-       }
-       this.timer = 2000;
-       this.isTimeOver = true;
-       this.selectRandomIngredients();
-     }, this.timer);
-     
-   }
-  
-
   resetPizza() {
-    if (this.pizzaIngredients.length === 9) {
+    if (this.pizzaIngredients.length === this.recipeIngredients * 3) {
       this.cookedPizzas++;
-
       this.pizzaIngredients = [];
-      //this.timer = 2;
-      this.isTimeOver = false;  
+      this.isTimeOver = false;
 
-      for (let i = 0; i < this.ingredientsSpots.length; i++) {
-        this.ingredientsSpots[i].removeChild(this.ingredientsSpots[i].firstChild);
-      }
-
-      for (let i = 0; i < this.selectedIngredients.length; i++) {
-        this.selectedIngredients[i].removeChild(this.selectedIngredients[i].firstChild);
-      }
-
-      const columns = document.getElementsByClassName("column");
-
-      if (columns.length !== 0) {
-        for (let i = 0; i < columns.length; i++) {
-          if (columns[i].firstChild !== null) columns[i].removeChild(columns[i].firstChild);
-        }
-      }
-      
-      this.setupEverything();
+      this.removeChildDivs();
+      this.levelUp();
+      this.setupGame();
     }
   }
 }
 
 const game = new Game();
 
-game.setupEverything();
+game.setupGame();
