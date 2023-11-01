@@ -1,12 +1,12 @@
 // Push available ingredients images into an array
 const imagesArray = [];
 
-imagesArray.push("../images/mushrooms.png");
-imagesArray.push("../images/olives.png");
-imagesArray.push("../images/pepper.png");
-imagesArray.push("../images/pepperoni.png");
-imagesArray.push("../images/shrimp.png");
-imagesArray.push("../images/tomato.png");
+imagesArray.push("./images/mushrooms.png");
+imagesArray.push("./images/olives.png");
+imagesArray.push("./images/pepper.png");
+imagesArray.push("./images/pepperoni.png");
+imagesArray.push("./images/shrimp.png");
+imagesArray.push("./images/tomato.png");
 
 // Get html elements to manipulate
 /* const ingredientsArea = document.getElementById("ingredients-area");
@@ -113,7 +113,7 @@ class Game {
             ingredients[i].setAttribute("src", this.shuffledImages[i]);
             this.placeIngredients(ingredients[i]);
           } else {
-            ingredients[i].setAttribute("src", "../images/wrong.png");
+            ingredients[i].setAttribute("src", "./images/wrong.png");
             this.lives--;
             this.livesSpan.innerHTML = `Lives: ${this.lives}`;
           }
@@ -172,7 +172,7 @@ class Game {
         console.log(this.selectedIngredients)
         
         if (!this.isTimeOver) {
-          newElm.setAttribute("src", "../images/question2.png");
+          newElm.setAttribute("src", "./images/question2.png");
           newElm.setAttribute("class", "sltdImage");
           console.log("asdsad");
 
@@ -219,7 +219,7 @@ class Game {
   hideAvailableIngredients() {
     setTimeout(() => {
       for (let i = 0; i < this.ingredientsSpots.length; i++) {
-        this.ingredientsSpots[i].firstChild.setAttribute("src", "../images/question2.png");
+        this.ingredientsSpots[i].firstChild.setAttribute("src", "./images/question2.png");
       }
       this.timer = 0;
       this.isTimeOver = true;
