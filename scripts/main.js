@@ -105,23 +105,6 @@ class Game {
   }
 
   levelUp() {
-    /*    if (this.cookedPizzas >= 2) {
-      this.level = 2;
-      
-    }
-    if (this.cookedPizzas >= 4) {
-      this.level = 3;
-    }
-    if (this.cookedPizzas >= 4) {
-      this.level = 4;
-    }
-    if (this.cookedPizzas >= 4) {
-      this.level = 5;
-    }
-    if (this.cookedPizzas >= 4) {
-      this.level = 6;
-    } */
-
     switch (this.cookedPizzas) {
       case 2:
         this.level = 2;
@@ -149,7 +132,6 @@ class Game {
         this.recipeIngredients = 3;
         break;
     }
-
     this.levelSpan.innerHTML = `Level: ${this.level}`;
   }
 
