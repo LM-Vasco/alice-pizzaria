@@ -19,7 +19,7 @@ body {
   margin: 5% auto;
   height: 80vh;
   width: 70vw;
-  border-radius: 20px;
+  border-radius: 50px;
 }
 
 /* 
@@ -34,11 +34,11 @@ body {
 }
 
 #title > h1 {
-  font-size: 90px;
+  font-size: 80px;
   color: 	#b61500;
 }
 
-#instructions-div {
+.main-text {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,10 +47,17 @@ body {
   margin: 0 auto;
 }
 
-#instructions-div > p {
-  line-height: 70px;
+.main-text > p {
+  line-height: 60px;
   text-align: center;
-  font-size: 50px;
+  font-size: 45px;
+  color: 	#b61500;
+}
+
+#instructions {
+  line-height: 40px;
+  list-style: '- ';
+  font-size: 20px;
   color: 	#b61500;
 }
 
