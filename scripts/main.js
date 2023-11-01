@@ -24,7 +24,6 @@ class Game {
     this.selectedIngredients = null;
     this.shuffledImages = [];
     this.cookButton = null;
-    this.timerSpan = null;
     this.pizzasCookedSpan = null;
     this.livesSpan = null;
     this.pizzaIngredients = [];
@@ -34,6 +33,7 @@ class Game {
     this.timer = 2000;
     this.isTimeOver = false;
     this.getDomElements();
+    
   }
 
   getDomElements() {
@@ -43,9 +43,9 @@ class Game {
       this.ingredientsList = document.getElementById("ingredient-list");
       this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
       this.cookButton = document.getElementById("cook-button");
-      this.timerSpan = document.getElementById("time-left");
       this.pizzasCookedSpan = document.getElementById("pizzas-cooked");
       this.livesSpan = document.getElementById("lives");
+      this.counterSpan = document.getElementById('counter')
 
       this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
       this.livesSpan.innerHTML = `Lives: ${this.lives}`;
@@ -119,7 +119,7 @@ class Game {
           }
 
           if (this.lives <= 0) {
-            location.href = "./index.html";
+            location.href = "./gameover.html";
           }
 
           // QQ coisa tipo if pizza has 9 ing, it's done and return
@@ -169,12 +169,12 @@ class Game {
 
         let newElm = document.createElement("img");
 
-        console.log(this.selectedIngredients)
+        //console.log(this.selectedIngredients)
         
         if (!this.isTimeOver) {
           newElm.setAttribute("src", "./images/question2.png");
           newElm.setAttribute("class", "sltdImage");
-          console.log("asdsad");
+          //console.log("asdsad");
 
           this.selectedIngredients[index].appendChild(newElm);
         } else {
@@ -216,25 +216,26 @@ class Game {
     }
   }
 
+  
   hideAvailableIngredients() {
-    setTimeout(() => {
-      for (let i = 0; i < this.ingredientsSpots.length; i++) {
-        this.ingredientsSpots[i].firstChild.setAttribute("src", "./images/question2.png");
-      }
-      this.timer = 0;
-      this.isTimeOver = true;
-      this.selectRandomIngredients();
-    }, this.timer);
-  }
+     setTimeout(() => {
+       for (let i = 0; i < this.ingredientsSpots.length; i++) {
+         this.ingredientsSpots[i].firstChild.setAttribute("src", "./images/question2.png");
+       }
+       this.timer = 2000;
+       this.isTimeOver = true;
+       this.selectRandomIngredients();
+     }, this.timer);
+     
+   }
+  
 
   resetPizza() {
-    //console.log(this.pizzaIngredients);
     if (this.pizzaIngredients.length === 9) {
       this.cookedPizzas++;
 
       this.pizzaIngredients = [];
-      //console.log(this.pizzaIngredients);
-      this.timer = 2000;
+      //this.timer = 2;
       this.isTimeOver = false;  
 
       for (let i = 0; i < this.ingredientsSpots.length; i++) {
@@ -253,7 +254,6 @@ class Game {
         }
       }
       
-      //console.log("AM HERE");
       this.setupEverything();
     }
   }

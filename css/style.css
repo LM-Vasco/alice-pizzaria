@@ -2,22 +2,24 @@
     CSS common to all pages
 */
 
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap"); */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Merienda:wght@600&display=swap');
 
 body {
-  background-color: #dc6b29;
-  font-family: "Dancing Script", cursive;
+  background-image: url(../images/background.jpg);
+  background-size: contain;
+  font-family: 'Merienda', cursive;
   font-size: 50px;
 }
 
 .game-screen {
   display: flex;
   flex-direction: column;
+  background-color: #f7bd67;
   margin: 5% auto;
-  /* border: 5px solid #b61500; */ /*TEMPORARY JUST TO SEE SIZES AND FITTINGS*/
-  border-radius: 5px;
   height: 80vh;
   width: 70vw;
+  border-radius: 20px;
 }
 
 /* 
@@ -28,11 +30,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20%;
+  height: 30%;
 }
 
 #title > h1 {
-  font-size: 100px;
+  font-size: 90px;
+  color: 	#b61500;
 }
 
 #instructions-div {
@@ -45,7 +48,10 @@ body {
 }
 
 #instructions-div > p {
-  font-size: 60px;
+  line-height: 70px;
+  text-align: center;
+  font-size: 50px;
+  color: 	#b61500;
 }
 
 #play-button-div {
@@ -75,7 +81,7 @@ body {
 
 #game-area {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
 }
 
 #ui-elements {
@@ -85,15 +91,16 @@ body {
   justify-content: space-around;
   align-items: center;
   height: 15%;
-  background-color: #ffac0e;
+  color: #b61500;
+  /* background-color: #dc6b29;   */
   /* border: 2px solid yellow; */
 }
 
-#banner:first-child {
+/* #banner:first-child {
   font-size: 70px;
   width: 100%;
   text-align: center;
-}
+} */
 
 #ingredients-area {
   display: flex;
@@ -101,7 +108,7 @@ body {
   align-content: center;
   align-items: center;
   height: 20%;
-  background-color: #ffac0e;
+  /* background-color: #dc6b29;  */
   /* border: 2px solid yellow; */
 }
 
@@ -124,7 +131,7 @@ body {
   flex-wrap: nowrap;
   /* width: 100%; */
   height: 65%;
-  background-color: 	#ffac0e;
+  /* background-color: #dc6b29; */
   /* border: 2px solid blue; */
   /* background-image: url('../images/background.jpg');
     background-size: 100% 100%;
@@ -199,11 +206,10 @@ body {
   /* border: 2px solid brown; */
 }
 
-#cook-button {
+#cook-button, #play-button {
   background-color: #ffac0e;
   width: 150px;
   height: 60px;
-  font-family: "Dancing Spirit", cursive;
   font-size: 20px;
   font-weight: bold;
   border-radius: 20px;
