@@ -66,7 +66,7 @@ class Game {
     this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
     this.livesSpan.innerHTML = `Lives: ${this.lives}`;
 
-    this.backgroundMusic = new Audio("/sounds/background.mp3")
+    this.backgroundMusic = new Audio("./sounds/background.mp3")
     this.backgroundMusic.play();
   }
 
