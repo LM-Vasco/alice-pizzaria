@@ -7,19 +7,23 @@ class Game {
     this.ingredientsList = null;
     this.selectedIngredients = null;
     this.cookButton = null;
+    this.levelSpan = null;
+    this.scoreSpan = null;
     this.pizzasCookedSpan = null;
     this.livesSpan = null;
-    this.levelSpan = null;
 
     this.shuffledImages = [];
     this.pizzaIngredients = [];
 
-    this.level = 1;
     this.availableIngredients = 3;
     this.recipeIngredients = 1;
-    this.lives = 3;
+    this.level = 1;
+    this.score = 0;
+    this.highscore = 0;
+    this.pointsPerPizza = 10;
     this.cookedPizzas = 0;
-    this.timer = 2000;
+    this.lives = 3;
+    this.timer = 3000;
     this.isTimeOver = false;
     this.isGameOver = false;
 
@@ -32,13 +36,15 @@ class Game {
     this.ingredientsList = document.getElementById("ingredient-list");
     this.selectedIngredients = this.ingredientsList.getElementsByClassName("selected-ingredients");
     this.cookButton = document.getElementById("cook-button");
+    this.levelSpan = document.getElementById("level");
+    this.scoreSpan = document.getElementById("score");
     this.pizzasCookedSpan = document.getElementById("pizzas-cooked");
     this.livesSpan = document.getElementById("lives");
-    this.levelSpan = document.getElementById("level");
 
+    this.levelSpan.innerHTML = `Level: ${this.level}`;
+    this.scoreSpan.innerHTML = `Score: ${this.score}`;
     this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
     this.livesSpan.innerHTML = `Lives: ${this.lives}`;
-    this.levelSpan.innerHTML = `Level: ${this.level}`;
   }
 
   setupGame() {
@@ -110,26 +116,31 @@ class Game {
         this.level = 2;
         this.availableIngredients = 4;
         this.recipeIngredients = 1;
+        this.pointsPerPizza = 15;
         break;
       case 4:
         this.level = 3;
         this.availableIngredients = 4;
         this.recipeIngredients = 2;
+        this.pointsPerPizza = 20;
         break;
       case 6:
         this.level = 4;
         this.availableIngredients = 5;
         this.recipeIngredients = 2;
+        this.pointsPerPizza = 25;
         break;
       case 8:
         this.level = 5;
         this.availableIngredients = 5;
         this.recipeIngredients = 3;
+        this.pointsPerPizza = 30;
         break;
       case 10:
         this.level = 6;
         this.availableIngredients = 6;
         this.recipeIngredients = 3;
+        this.pointsPerPizza = 35;
         break;
     }
     this.levelSpan.innerHTML = `Level: ${this.level}`;
@@ -142,6 +153,7 @@ class Game {
       this.cookButton.addEventListener("click", () => {
         this.resetPizza();
         this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
+        this.scoreSpan.innerHTML = `Score: ${this.score}`;
       });
 
       for (let i = 0; i < ingredients.length; i++) {
@@ -241,7 +253,7 @@ class Game {
       for (let i = 0; i < this.ingredientsSpots.length; i++) {
         this.ingredientsSpots[i].firstChild.setAttribute("src", "./images/question2.png");
       }
-      this.timer = 2000;
+      this.timer = 3000;
       this.isTimeOver = true;
       this.selectRandomIngredients();
     }, this.timer);
@@ -267,6 +279,11 @@ class Game {
 
   resetPizza() {
     if (this.pizzaIngredients.length === this.recipeIngredients * 3) {
+      this.score += this.pointsPerPizza;
+      if (this.score > localStorage.getItem('highscore')) {
+        this.highscore = this.score;
+        localStorage.setItem('highscore', this.highscore);
+      }
       this.cookedPizzas++;
       this.pizzaIngredients = [];
       this.isTimeOver = false;

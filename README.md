@@ -62,12 +62,14 @@
 
 [X] lives
 
-[ ] beautify (objects images)
+[X] beautify (objects images)
 
 
 ### Bonus:
 
 
-[ ] level up after x cooked pizzas
+[X] level up after x cooked pizzas
+
+[X] implement score and higscore locally stored
 
 [ ] increase list of available ingredients
