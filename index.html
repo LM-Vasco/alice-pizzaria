@@ -20,30 +20,30 @@
         </p>
       </div>
       <div class="main-text">
-        <ul id="instructions">
-          Instructions:
-          <li>Ingredients will appear in boxes at the middle of the screen. You have to memorize their positions;</li>
-          <li>After 3 seconds, they will be hidden and 3 random ingredients will be shown on the left;</li>
-          <li>You have to click where you think their are in the previously hidden boxes;</li>
-          <li>When the ingredients are all placed, click "COOK" in the oven to finish your pizza!</li>
-          <li>If you click on the wrong ingredient, you lose a life;</li>
-          <li>You can guess what happens if you lose them all.</li>
-        </ul>
+        <div id="instructions">
+          <ul>
+            Instructions:
+            <br>
+            <li>Ingredients will appear in boxes at the middle of the screen. You have to memorize their positions; </li>
+            <li>After 3 seconds, they will be hidden and a random ingredient will be shown on the left;</li>
+            <li>You have to click where you think their are in the previously hidden boxes;</li>
+            <li>When the ingredients are all placed, click "COOK" in the oven to finish your pizza!</li>
+            <li>If you click on the wrong ingredient, you lose a life;</li>
+            <li>You can guess what happens if you lose them all.</li>
+          </ul>
+        </div>
+        <div id="instructions-images">
+          <img src="./images/instructions1.png" class="images">
+          <img src="./images/instructions3.png" class="images">
+          <img src="./images/instructions2.png" class="images">
+          <img src="./images/instructions4.png" class="images">
+        </div>
       </div>
 
       <div id="play-button-div">
-        <button id="play-button" >Let's go!</button>
+        <button id="play-button">Let's go!</button>
       </div>
     </div>
     <script src="./scripts/button.js"></script>
-    <!-- <script>
-      function playClick() {
-        var sound = document.getElementById("audio");
-        sound.play();
-        sound.addEventListener("ended", function () {
-          location.href = "game.html";
-        });
-      }
-    </script> -->
   </body>
 </html>

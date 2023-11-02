@@ -54,10 +54,30 @@ body {
 }
 
 #instructions {
-  line-height: 40px;
+  display: flex;
+  flex-direction: column;
+  line-height: 50px;
   list-style: '- ';
   font-size: 20px;
   color: 	#b61500;
+  margin-right: 20px;
+}
+
+#instructions > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#instructions-images {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#instructions-images > img {
+  height: 70px;
 }
 
 #play-button-div {
