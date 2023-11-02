@@ -72,4 +72,8 @@
 
 [X] implement score and higscore locally stored
 
-[ ] increase list of available ingredients
+[X] increase list of available ingredients
+
+[X] added music and sfx
+
+[X] some hover effects

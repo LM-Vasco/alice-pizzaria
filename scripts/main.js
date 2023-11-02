@@ -1,6 +1,23 @@
 class Game {
   constructor() {
-    this.ingredientsImages = ["mushrooms", "olives", "pepper", "pepperoni", "shrimp", "tomato"];
+    this.ingredientsImages = [
+      "mushrooms",
+      "olives",
+      "pepper",
+      "chicken",
+      "pepperoni",
+      "shrimp",
+      "tomato",
+      "fish",
+      "pineapple",
+    ];
+    this.sounds = {
+      pineapple: "./sounds/pineapple.wav",
+      click: "./sounds/click.wav",
+      wrong: "./sounds/wrong.wav",
+      cook: "./sounds/cook.wav",
+      gameover: "./sounds/gameover.wav",
+    };
 
     this.ingredientsArea = null;
     this.ingredientsSpots = null;
@@ -11,6 +28,8 @@ class Game {
     this.scoreSpan = null;
     this.pizzasCookedSpan = null;
     this.livesSpan = null;
+    this.sound = null;
+    this.backgroundMusic = null;
 
     this.shuffledImages = [];
     this.pizzaIngredients = [];
@@ -26,6 +45,7 @@ class Game {
     this.timer = 3000;
     this.isTimeOver = false;
     this.isGameOver = false;
+    this.audio = null;
 
     this.getDomElements();
   }
@@ -45,6 +65,9 @@ class Game {
     this.scoreSpan.innerHTML = `Score: ${this.score}`;
     this.pizzasCookedSpan.innerHTML = `Cooked Pizzas: ${this.cookedPizzas}`;
     this.livesSpan.innerHTML = `Lives: ${this.lives}`;
+
+    this.backgroundMusic = new Audio("/sounds/background.mp3")
+    this.backgroundMusic.play();
   }
 
   setupGame() {
@@ -149,6 +172,7 @@ class Game {
   addEventListenerIngredients() {
     if (!this.isGameOver) {
       const ingredients = document.getElementsByClassName("avblImage");
+      this.sound = null;
 
       this.cookButton.addEventListener("click", () => {
         this.resetPizza();
@@ -162,10 +186,19 @@ class Game {
             ingredients[i].setAttribute("src", "./images/" + this.shuffledImages[i] + ".png");
             ingredients[i].setAttribute("name", this.shuffledImages[i]);
             this.placeIngredients(ingredients[i]);
+            if (ingredients[i].name === "pineapple") {
+              this.sound = new Audio(this.sounds.pineapple);
+              this.sound.play();
+            } else {
+              this.sound = new Audio(this.sounds.click);
+              this.sound.play();
+            }
           } else {
             ingredients[i].setAttribute("src", "./images/wrong.png");
             this.lives--;
             this.livesSpan.innerHTML = `Lives: ${this.lives}`;
+            this.sound = new Audio(this.sounds.wrong);
+            this.sound.play();
           }
 
           if (this.lives <= 0) {
@@ -280,10 +313,12 @@ class Game {
   resetPizza() {
     if (this.pizzaIngredients.length === this.recipeIngredients * 3) {
       this.score += this.pointsPerPizza;
-      if (this.score > localStorage.getItem('highscore')) {
+      if (this.score > localStorage.getItem("highscore")) {
         this.highscore = this.score;
-        localStorage.setItem('highscore', this.highscore);
+        localStorage.setItem("highscore", this.highscore);
       }
+      this.sound = new Audio(this.sounds.cook);
+      this.sound.play();
       this.cookedPizzas++;
       this.pizzaIngredients = [];
       this.isTimeOver = false;

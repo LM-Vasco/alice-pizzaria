@@ -20,7 +20,8 @@
         </p>
       </div>
       <div class="main-text">
-        <ul id="instructions">Instructions:
+        <ul id="instructions">
+          Instructions:
           <li>Ingredients will appear in boxes at the middle of the screen. You have to memorize their positions;</li>
           <li>After 3 seconds, they will be hidden and 3 random ingredients will be shown on the left;</li>
           <li>You have to click where you think their are in the previously hidden boxes;</li>
@@ -31,8 +32,18 @@
       </div>
 
       <div id="play-button-div">
-        <button id="play-button" onclick="window.location.href = 'game.html'">Let's go!</button>
+        <button id="play-button" >Let's go!</button>
       </div>
     </div>
+    <script src="./scripts/button.js"></script>
+    <!-- <script>
+      function playClick() {
+        var sound = document.getElementById("audio");
+        sound.play();
+        sound.addEventListener("ended", function () {
+          location.href = "game.html";
+        });
+      }
+    </script> -->
   </body>
 </html>
