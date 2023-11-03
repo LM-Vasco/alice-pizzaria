@@ -38,6 +38,7 @@ After you've placed all the ingredients, click the *COOK* button:
 
 As you make more pizzas, the amount of available ingredients and ingredients to use will increase:
 
+![](https://github.com/LM-Vasco/alice-pizzaria/blob/main/images/readme/readme_available_ingredients_increase.png)
 ![](https://github.com/LM-Vasco/alice-pizzaria/blob/main/images/readme/readme_cutting_board_increase.png)
 
 The game ends when you lose all your 3 lives.
