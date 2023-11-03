@@ -1,79 +1,53 @@
 # ALICE'S PIZZARIA
 
-## MVP:
+
+## Description
 
 
-- Player will cook pizzas
-- A list of available ingredients will be shown for a few seconds and then disappear
-- Player needs to remember location of said ingredients and click them
-- A list of ingredients to use will appear
-- If player selects wrong ingredients 3 times, game is over
+This is my first project for the Ironhack Web Development Bootcamp.
+
+You are the new cook for Alice's Pizzaria and you have to make some delicious pizzas!
 
 
-## MILESTONES
-
-### Milestone 1:
+## Instructions
 
 
-[X] create html and css structure to be used all over
+This is the game screen:
 
-[X] try not to lose mind and apply css needed for end-purpose
+![](https://github.com/LM-Vasco/alice-pizzaria/tree/main/images/readme/readme_game_screen.png)
 
-[X] add some elements to html
+At the middle, you can see the available ingredients:
 
+![](https://github.com/LM-Vasco/alice-pizzaria/tree/main/images/readme/readme_available_ingredients.png)
 
-### Milestone 2:
+After 3 seconds they will be hidden, so make sure you memorize their positions!
 
+At the left of the screen you have a cutting board where the ingredients you have to use will be:
 
-[X] create row like needed to display list of ingredients
+![](https://github.com/LM-Vasco/alice-pizzaria/tree/main/images/readme/readme_cutting_board.png)
 
-[X] create column like needed to display selected ingredients
+You have to go back to the now hidden available ingredients and click where you think the right ones are:
 
-[X] create grid like needed for correct placement of ingredients on pizza
+![](https://github.com/LM-Vasco/alice-pizzaria/tree/main/images/readme/readme_hidden_ingredients.png)
 
+If you click on the wrong one, you lose one live.
 
-### Milestone 3:
+After you've placed all the ingredients, click the *COOK* button:
 
+![](https://github.com/LM-Vasco/alice-pizzaria/tree/main/images/readme/readme_cook.png)
 
-[X] code to display available ingredients
+As you make more pizzas, the amount of available ingredients and ingredients to use will increase:
 
-[X] code to shuffle available ingredients
+![](https://github.com/LM-Vasco/alice-pizzaria/tree/main/images/readme/readme_cutting_board_increase.png)
 
-[X] code to display list of ingredients to use
+The game ends when you lose all your 3 lives.
 
-
-### Milestone 4:
-
-[X] code to select ingredients (click event)
-
-[X] display selected ingredients on top of pizza
-
-[X] code win/lose conditions
-
-[X] code hiding images
+### Have fun!
 
 
-### Milestone 5:
+
+## Let's make some pizzas!
 
 
-**UI elements that display information:**
+[Alice's Pizzaria](https://lm-vasco.github.io/alice-pizzaria/)
 
-[X] pizzas cooked
-
-[X] lives
-
-[X] beautify (objects images)
-
-
-### Bonus:
-
-
-[X] level up after x cooked pizzas
-
-[X] implement score and higscore locally stored
-
-[X] increase list of available ingredients
-
-[X] added music and sfx
-
-[X] some hover effects
